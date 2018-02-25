@@ -44,10 +44,6 @@
 	    margin: 0.1em;
 	    flex: 1;
         box-sizing: border-box;
-
-	}
-
-	.text {
 	    -webkit-user-select: none; /* Safari */
 		-moz-user-select: none; /* Firefox */
 		-ms-user-select: none; /* IE10+/Edge */
@@ -110,12 +106,9 @@
  			container.appendChild(wrapper);
 	 		for (let i = 0; i< 10; i++) {
 	 			const n = document.createElement('div');
-	 			const n2 = document.createElement('div');
 	 			n.className = 'box';
-	 			n2.textContent = 10 * j + i + 1;
-	 			n2.className = 'text';
+	 			n.textContent = 10 * j + i + 1;
 	 			wrapper.appendChild(n);
-	 			n.appendChild(n2);
 
 	 			n.addEventListener('click', () => {
 	 				if (n.className.indexOf('toggled') >= 0) {
