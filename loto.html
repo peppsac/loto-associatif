@@ -102,6 +102,15 @@
   </div>
 
   <script type="text/javascript">
+  // full screen on 'f' key press (Esc to exit)
+  document.addEventListener("keydown", function(e) {
+    if (e.keyCode == 70) {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      }
+    }
+  }, false);
+
   const container = document.getElementById('container');
   const lastnumber = document.getElementById('lastnumber');
   for (let j=0; j<9; j++) {
