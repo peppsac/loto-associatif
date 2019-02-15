@@ -166,9 +166,13 @@
     }
   }
 
-  // full screen on 'f' key press (Esc to exit)
+  // Keyboard management
   document.addEventListener("keydown", function(e) {
-    if (e.keyCode == 70) {
+    // keyCode and key properties values can be easily get with this webpage:
+    //https://keycode.info/
+
+    // Full screen on 'f' key press (Esc to exit)
+    if (e.key == 'f') {
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen();
       }
