@@ -1,125 +1,148 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Loto</title>
-    <meta charset="utf-8">
-    <style>
-	body {
-		margin: 10px;
-		/*margin-left: 90px;
-		margin-right: 90px;*/
-		height: 100%;
-		overflow: hidden;
-	}
+<head>
+  <title>Loto</title>
+  <meta charset="utf-8">
+  <style>
+  body {
+    margin: 10px;
+    /*margin-left: 90px;
+    margin-right: 90px;*/
+    height: 100%;
+    overflow: hidden;
+  }
 
-	@media (max-aspect-ratio: 9/6) {
-		:root {
-		  --cell-size: calc((70vw - 20px - 9 * 0.2em) / 9);
-		}
+  @media (max-aspect-ratio: 9/6) {
+    :root {
+      --cell-size: calc((70vw - 20px - 9 * 0.2em) / 9);
+    }
 
-		#lastnumber {
-			font-size: 20vw;
-		}
-	}
-	@media (min-aspect-ratio: 9/6) {
-		:root {
-		  --cell-size: calc((100vh - 20px - 9 * 0.2em) / 9);
-		}
-		#lastnumber {
-			font-size: calc((100vw - var(--cell-size) * 10) * 0.7);
-		}
-	}
-
-
-	.box {
-		height: var(--cell-size);
-		width: var(--cell-size);
-		background-color: #999;
-		color: #999;
-		border-radius: 5px;
-		font-size: calc(var(--cell-size) / 2);
-	    padding: 7px;
-	    text-align: center;
-	    line-height: var(--cell-size);
-	    margin: 0.1em;
-	    flex: 1;
-        box-sizing: border-box;
-	    -webkit-user-select: none; /* Safari */
-		-moz-user-select: none; /* Firefox */
-		-ms-user-select: none; /* IE10+/Edge */
-		user-select: none; /* Standard */
-	}
-
-	.box:hover {
-		color: #fff;
-	}
-
-	.box.toggled{
-		background-color: #29c659; /*cc0;*/
-		color: #fff;
-	}
-
-	#container {
-		/*width: 75%;*/
-	}
-	#lastnumber {
-		/*padding: 10%;
-		width: 15%;
-		margin: auto;*/
-		width: 100%;
-		margin-top: auto;
-		margin-bottom: auto;
-		text-align: center;
-	}
-
-	.wrapper {
-		display: flex;
-		flex-direction: row;
-		align-items: stretch;
-		width: 100%;
-
-	}
-
-	#parent {
-		width: 100%;
-		display: flex;
-		flex-direction: row;
-		margin-top: 50vh;
-		transform: translateY(-50%);
-	}
+    #lastnumber {
+      font-size: 20vw;
+    }
+  }
+  @media (min-aspect-ratio: 9/6) {
+    :root {
+      --cell-size: calc((100vh - 20px - 9 * 0.2em) / 9);
+    }
+    #lastnumber {
+      font-size: calc((100vw - var(--cell-size) * 10) * 0.7);
+    }
+  }
 
 
-   </style>
+  .box {
+    height: var(--cell-size);
+    width: var(--cell-size);
+    background-color: #999;
+    color: #999;
+    border-radius: 5px;
+    font-size: calc(var(--cell-size) / 2);
+    padding: 7px;
+    text-align: center;
+    line-height: var(--cell-size);
+    margin: 0.1em;
+    flex: 1;
+    box-sizing: border-box;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+  }
+
+  .box:hover {
+    color: #fff;
+  }
+
+  .box.toggled{
+    background-color: #29c659; /*cc0;*/
+    color: #fff;
+  }
+
+  #container {
+    /*width: 75%;*/
+  }
+  #lastnumber {
+    /*padding: 10%;
+    width: 15%;
+    margin: auto;*/
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+
+  }
+
+  #parent {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 50vh;
+    transform: translateY(-50%);
+  }
+  </style>
 </head>
- <body>
 
- 	<div id="parent">
-	 	<div id="container"></div>
-	 	<div id="lastnumber"></div>
-	 </div>
- 	<script type="text/javascript">
- 		const container = document.getElementById('container');
- 		const lastnumber = document.getElementById('lastnumber');
- 		for (let j=0; j<9; j++) {
- 			const wrapper = document.createElement('div');
- 			wrapper.className = 'wrapper';
- 			container.appendChild(wrapper);
-	 		for (let i = 0; i< 10; i++) {
-	 			const n = document.createElement('div');
-	 			n.className = 'box';
-	 			n.textContent = 10 * j + i + 1;
-	 			wrapper.appendChild(n);
+<body>
 
-	 			n.addEventListener('click', () => {
-	 				if (n.className.indexOf('toggled') >= 0) {
-	 					n.className = 'box';
-	 				} else {
-	 					n.className = 'box toggled';
-	 					lastnumber.textContent = 10 * j + i + 1;
-	 				}
-	 			});
-	 		}
-	 	}
- 	</script>
+  <div id="parent">
+    <div id="container"></div>
+    <div id="lastnumber"></div>
+  </div>
+
+  <script type="text/javascript">
+  // full screen on 'f' key press (Esc to exit)
+  document.addEventListener("keydown", function(e) {
+    if (e.keyCode == 70) {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      }
+    }
+  }, false);
+
+  // Boxes management
+  var drawnNumbers = [];
+  const container = document.getElementById('container');
+  const lastnumber = document.getElementById('lastnumber');
+  for (let j=0; j<9; j++) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'wrapper';
+    container.appendChild(wrapper);
+    for (let i = 0; i< 10; i++) {
+      const n = 10 * j + i + 1
+      const nDiv = document.createElement('div');
+      nDiv.className = 'box';
+      nDiv.textContent = n;
+      wrapper.appendChild(nDiv);
+
+      nDiv.addEventListener('click', () => {
+        if (nDiv.className.indexOf('toggled') >= 0) {
+          if (drawnNumbers.length && n == drawnNumbers[drawnNumbers.length-1]) {
+            drawnNumbers.pop()
+            lastnumber.textContent = drawnNumbers[drawnNumbers.length-1];
+            nDiv.className = 'box';
+          }
+        } else {
+          drawnNumbers.push(n)
+          lastnumber.textContent = n;
+          nDiv.className = 'box toggled';
+        }
+      });
+    }
+  }
+  </script>
+
 </body>
+
 </html>
