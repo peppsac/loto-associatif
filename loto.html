@@ -167,7 +167,8 @@
   }
 
   // Keyboard management
-  document.addEventListener("keydown", function(e) {
+  var nextnumber = 0;
+  document.addEventListener('keydown', function(e) {
     // keyCode and key properties values can be easily get with this webpage:
     //https://keycode.info/
 
@@ -179,6 +180,17 @@
     } else if (e.keyCode == 68) {
       darkTheme = !darkTheme;
       document.documentElement.setAttribute('data-theme', darkTheme ? 'dark' : 'light')
+    }
+
+    // Drawn numbers
+    if (e.key >= 0 && e.key <= 9) {
+      nextnumber = nextnumber * 10 + parseInt(e.key);
+    }
+    if (e.key == 'Enter') {
+      if (nextnumber >= 1 && nextnumber <= 90) {
+        toggleBox(nextnumber);
+      }
+      nextnumber = 0;
     }
   }, false);
 

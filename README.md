@@ -9,6 +9,7 @@ Ensuite :
 - recharger la page pour recommencer une partie
 - appui sur la touche f pour passer en plein écran (Esc pour quitter)
 - un clic sur le dernier numéro sorti pour l'annuler
+- saisir les tirages à l'aide du clavier numérique (numéro tiré suivi de la touche Entrée)
 
 ## Le résultat
 
