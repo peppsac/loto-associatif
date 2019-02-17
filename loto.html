@@ -4,12 +4,34 @@
   <title>Loto</title>
   <meta charset="utf-8">
   <style>
+
+  html {
+    /* default color values */
+    background-color: #fff;
+
+    --background: #999;
+    --background-toggle: #29c659;
+    --big-text: #222;
+    --text-hover: #fff;
+    --text-toggle: #fff;
+
+    font-weight: bold;
+  }
+  html[data-theme='dark'] {
+    background-color: #222;
+
+    --background: #ddd;
+    --background-toggle: #36FF72;
+    --big-text: #fff;
+    --text-hover: #222;
+    --text-toggle: #222;
+  }
+
   body {
     margin: 10px;
-    /*margin-left: 90px;
-    margin-right: 90px;*/
     height: 100%;
     overflow: hidden;
+    color: var(--big-text);
   }
 
   @media (max-aspect-ratio: 9/6) {
@@ -34,13 +56,13 @@
   .box {
     height: var(--cell-size);
     width: var(--cell-size);
-    background-color: #999;
-    color: #999;
+    background-color: var(--background);
+    color: var(--background);
     border-radius: 5px;
-    font-size: calc(var(--cell-size) / 2);
+    font-size: calc(var(--cell-size) * 0.7);
     padding: 7px;
     text-align: center;
-    line-height: var(--cell-size);
+    line-height: calc(var(--cell-size) / 1.2);
     margin: 0.1em;
     flex: 1;
     box-sizing: border-box;
@@ -51,21 +73,15 @@
   }
 
   .box:hover {
-    color: #fff;
+    color: var(--text-hover);
   }
 
   .box.toggled{
-    background-color: #29c659; /*cc0;*/
-    color: #fff;
+    background-color: var(--background-toggle);
+    color: var(--text-toggle);
   }
 
-  #container {
-    /*width: 75%;*/
-  }
   #lastnumber {
-    /*padding: 10%;
-    width: 15%;
-    margin: auto;*/
     width: 100%;
     margin-top: auto;
     margin-bottom: auto;
@@ -81,7 +97,15 @@
     flex-direction: row;
     align-items: stretch;
     width: 100%;
+  }
 
+  .wrapper:nth-child(even),
+  .box:nth-child(even) {
+    filter: brightness(120%);
+  }
+
+  .toggled {
+    filter: brightness(100%) !important;
   }
 
   #parent {
@@ -102,12 +126,16 @@
   </div>
 
   <script type="text/javascript">
+  let darkTheme = false;
   // full screen on 'f' key press (Esc to exit)
   document.addEventListener("keydown", function(e) {
     if (e.keyCode == 70) {
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen();
       }
+    } else if (e.keyCode == 68) {
+      darkTheme = !darkTheme;
+      document.documentElement.setAttribute('data-theme', darkTheme ? 'dark' : 'light')
     }
   }, false);
 
