@@ -126,10 +126,54 @@
   </div>
 
   <script type="text/javascript">
+
+  const container = document.getElementById('container');
+  const lastnumber = document.getElementById('lastnumber');
+  var drawnNumbers = [];
+  var boxes = [];
   let darkTheme = false;
-  // full screen on 'f' key press (Esc to exit)
-  document.addEventListener("keydown", function(e) {
-    if (e.keyCode == 70) {
+  
+  function toggleBox(n) {
+    if (boxes[n-1].className.indexOf('toggled') >= 0) {
+      if (drawnNumbers.length && n == drawnNumbers[drawnNumbers.length-1]) {
+        drawnNumbers.pop();
+        lastnumber.textContent = drawnNumbers[drawnNumbers.length-1];
+        boxes[n-1].className = 'box';
+      }
+    } else {
+      drawnNumbers.push(n);
+      lastnumber.textContent = n;
+      boxes[n-1].className = 'box toggled';
+    }
+  }
+
+  // Boxes management
+  for (let j=0; j<9; j++) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'wrapper';
+    container.appendChild(wrapper);
+    for (let i = 0; i< 10; i++) {
+      const n = 10 * j + i + 1
+      const box = document.createElement('div');
+      box.className = 'box';
+      box.textContent = n;
+      wrapper.appendChild(box);
+      boxes.push(box);
+
+      box.addEventListener('click', () => {
+        toggleBox(n);
+      });
+    }
+  }
+
+  // Keyboard management
+  var nextnumber = 0;
+  document.addEventListener('keydown', function(e) {
+    // keyCode and key properties values can be easily get with this webpage:
+    //https://keycode.info/
+
+    // Full screen on 'f' key press (Esc to exit)
+    if (e.key == 'f') {
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen();
       }
@@ -137,38 +181,19 @@
       darkTheme = !darkTheme;
       document.documentElement.setAttribute('data-theme', darkTheme ? 'dark' : 'light')
     }
+
+    // Drawn numbers
+    if (e.key >= 0 && e.key <= 9) {
+      nextnumber = nextnumber * 10 + parseInt(e.key);
+    }
+    if (e.key == 'Enter') {
+      if (nextnumber >= 1 && nextnumber <= 90) {
+        toggleBox(nextnumber);
+      }
+      nextnumber = 0;
+    }
   }, false);
 
-  // Boxes management
-  var drawnNumbers = [];
-  const container = document.getElementById('container');
-  const lastnumber = document.getElementById('lastnumber');
-  for (let j=0; j<9; j++) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'wrapper';
-    container.appendChild(wrapper);
-    for (let i = 0; i< 10; i++) {
-      const n = 10 * j + i + 1
-      const nDiv = document.createElement('div');
-      nDiv.className = 'box';
-      nDiv.textContent = n;
-      wrapper.appendChild(nDiv);
-
-      nDiv.addEventListener('click', () => {
-        if (nDiv.className.indexOf('toggled') >= 0) {
-          if (drawnNumbers.length && n == drawnNumbers[drawnNumbers.length-1]) {
-            drawnNumbers.pop()
-            lastnumber.textContent = drawnNumbers[drawnNumbers.length-1];
-            nDiv.className = 'box';
-          }
-        } else {
-          drawnNumbers.push(n)
-          lastnumber.textContent = n;
-          nDiv.className = 'box toggled';
-        }
-      });
-    }
-  }
   </script>
 
 </body>
